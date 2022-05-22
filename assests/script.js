@@ -39,3 +39,38 @@ function startQuiz() {
   qsectionEl.hidden = '';    
   displayQuestion();
 }
+
+function displayQuestion() {  
+    questionEl.innerText = questions[currentQuestion].title;
+    option1El.innerText = questions[currentQuestion].options[0];
+    option2El.innerText = questions[currentQuestion].options[1];
+    option3El.innerText = questions[currentQuestion].options[2];
+    option4El.innerText = questions[currentQuestion].options[3];      
+  }
+
+/**
+ * check the answer
+ * @returns 
+ */
+ function optionClick(event) {
+
+    console.log('event is: ', event);
+  
+    if(event.target.dataset.option == questions[currentQuestion].answer) {
+      // TODO correct answer is clicked.
+      console.log('correct!');
+    }
+    else {
+      // TODO incorrec answer is clicked.
+      console.warn('incorrect');
+    }
+    // TODO display the next question.
+    currentQuestion++;
+    if (currentQuestion >= questions.length) {
+      // TODO: the quiz is over! display the result now. 
+      qsectionEl.hidden = 'hidden';
+      resSectionEl.hidden = '';
+      return;
+    }
+    displayQuestion();
+  }
