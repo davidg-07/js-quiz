@@ -21,3 +21,21 @@ const questions = [
         answer: 4
       }
     ];
+
+/* Select the required html elements here... */
+const startBtnEl = document.getElementById('start-btn');
+const questionEl = document.getElementById('question');
+const option1El = document.getElementById('option1');
+const option2El = document.getElementById('option2');
+const option3El = document.getElementById('option3');
+const option4El = document.getElementById('option4');
+const qsectionEl = document.getElementById('question-section');
+const resSectionEl = document.getElementById('result-section');
+var currentQuestion = 0;
+
+console.log(option1El.dataset.answer);
+
+function startQuiz() {   
+  qsectionEl.hidden = '';    
+  displayQuestion();
+}
