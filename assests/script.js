@@ -6,20 +6,50 @@ const questions = [
       answer: 3
     },
     { // question[2]
-        title: 'question 2', // question[2].title
-        options: ['option1', 'option2', 'option3', 'option4'],
-        answer: 2 // question[1].answer
+        title: "Why do JavaScript and Java have similar names?", // question[2].title
+        options: ['JavaScript is a stripped-down version of Java', "JavaScript's syntax is loosely based on Java's ", 'They both originated on the island java', 'None of the above'],
+        answer: 2 
       },
       {
-        title: 'question 3',
-        options: ['option1', 'option2', 'option3', 'option4'],
-        answer: 4
+        title: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
+        options: ["The User's machine running a Web browser", "The Web server", "A central machine deep within Netscape's corporate offices", "None of the above"],
+        answer: 1
       },
       {
-        title: 'question 4',
-        options: ['option1', 'option2', 'option3', 'option4'],
-        answer: 4
-      }
+        title: "What are variables used for in JavaScript Programs?",
+        options: ["Storing numbers, dates, or other values", "Varying randomly", "Causing high-school algebra flashbacks", "None of the above"],
+        answer: 1
+      },
+      {
+          title: "How to create a Date object in JavaScript?",
+          options:["dateObjectName = new Date([parameters])", "dateObjectName.new Date([parameters])", "dateObjectName := new Date([parameters])", "dateObjectName Date([parameters])"],
+          answer:  1
+      },
+      {
+          title: "Which of the following keywords is used to define a variable in Javascript?",
+          options: ["var", "let", "Both A and B", "None of the above"],
+          answer: 3
+      },
+      {
+          title: "Which of the following methods is used to access HTML elements using Javascript?",
+          options: ["getElementbyId()", "getElementsByClassName()", "Both A and B", "None of the above"],
+          answer: 3
+      },
+      {
+          title: "To find the highest number in an array, the method to be used is?",
+          options: ["Math.highest", "Math.max()", "Math.largest", "Math.cal"],
+          answer: 2
+      },
+      {
+          title: "An array can be sorted in a reverse manner through the method?",
+          options: ["Sort()", "Reverse()", "Rev.length()", "Sort.length()"],
+          answer: 2
+      },
+      {
+          title:"Numeric array values can be sorted throught an array method named as?",
+          options: ["Sort()", "Lenght.sort()", "Reverse()", "Compare()"],
+          answer: 4
+      },
     ];
 
 /* Select the required html elements here... */
@@ -74,3 +104,9 @@ function displayQuestion() {
     }
     displayQuestion();
   }
+
+startBtnEl.addEventListener('click', startQuiz);
+option1El.addEventListener('click', optionClick);
+option2El.addEventListener('click', optionClick);
+option3El.addEventListener('click', optionClick);
+option4El.addEventListener('click', optionClick);
