@@ -7,21 +7,25 @@
     <link rel="stylesheet" href="./assests/style.css">
     <title>Javascript quiz</title>
 </head>
-<body class="body">
+<body>
     
     <button id="start-btn">Start Quiz</button>
-    
-    <section id="question-section" hidden="hidden">
-        <h3 id="question"></h3>
-        <button id="option1" data-option="1"></button>
-        <button id="option2" data-option="2"></button> 
-        <button id="option3" data-option="3"></button> 
-        <button id="option4" data-option="4"></button> 
-    </section>
 
-    <section id="result-section" hidden="hidden">
-        TODO here are the results
-    </section>
+    <div id="timerDisplay"></div>
+    
+    <div class="body" id="question-section" hidden="hidden">
+        <h3 id="question"></h3>
+        <button id="option1" data-option="1"></button><br>
+        <button id="option2" data-option="2"></button><br>
+        <button id="option3" data-option="3"></button><br>
+        <button id="option4" data-option="4"></button><br>
+    </div>
+
+    <div id="result-section" hidden="hidden">
+        <button id="">here are the results</button>
+    </div>
+
+    <div id="incorrect"></div>
 
 
     <script src="./assests/script.js"></script>

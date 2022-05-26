@@ -10,42 +10,42 @@ const questions = [
         options: ['JavaScript is a stripped-down version of Java', "JavaScript's syntax is loosely based on Java's ", 'They both originated on the island java', 'None of the above'],
         answer: 2 
       },
-      {
+      { // question [3]
         title: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
         options: ["The User's machine running a Web browser", "The Web server", "A central machine deep within Netscape's corporate offices", "None of the above"],
         answer: 1
       },
-      {
+      { // question [4]
         title: "What are variables used for in JavaScript Programs?",
         options: ["Storing numbers, dates, or other values", "Varying randomly", "Causing high-school algebra flashbacks", "None of the above"],
         answer: 1
       },
-      {
+      { // question [5]
           title: "How to create a Date object in JavaScript?",
           options:["dateObjectName = new Date([parameters])", "dateObjectName.new Date([parameters])", "dateObjectName := new Date([parameters])", "dateObjectName Date([parameters])"],
           answer:  1
       },
-      {
+      { // question [6]
           title: "Which of the following keywords is used to define a variable in Javascript?",
           options: ["var", "let", "Both A and B", "None of the above"],
           answer: 3
       },
-      {
+      { // question [7]
           title: "Which of the following methods is used to access HTML elements using Javascript?",
           options: ["getElementbyId()", "getElementsByClassName()", "Both A and B", "None of the above"],
           answer: 3
       },
-      {
+      { // question [8]
           title: "To find the highest number in an array, the method to be used is?",
           options: ["Math.highest", "Math.max()", "Math.largest", "Math.cal"],
           answer: 2
       },
-      {
+      { // question [9]
           title: "An array can be sorted in a reverse manner through the method?",
           options: ["Sort()", "Reverse()", "Rev.length()", "Sort.length()"],
           answer: 2
       },
-      {
+      { // question [10]
           title:"Numeric array values can be sorted throught an array method named as?",
           options: ["Sort()", "Lenght.sort()", "Reverse()", "Compare()"],
           answer: 4
@@ -68,6 +68,7 @@ console.log(option1El.dataset.answer);
 function startQuiz() {   
   qsectionEl.hidden = '';    
   displayQuestion();
+  timer();
 }
 
 function displayQuestion() {  
@@ -104,6 +105,54 @@ function displayQuestion() {
     }
     displayQuestion();
   }
+
+  const btn = document.getElementById('start-btn');
+
+btn.addEventListener('click', () => {
+  //  hide button
+  btn.style.display = 'none';
+
+  // const box = document.getElementById('box');
+  // box.style.display = 'block';
+});
+
+function highscore() {
+  var score = 0;
+  var highscore = localStorage.getItem("highscore");
+  console.log("localstorage");
+  console.log(localStorage);
+
+  if(highscore !== null){
+    if(score > highscore) {
+      localStorage.setItem("highscore", score);
+      }
+    else { 
+      localStorage.setItem("highscore", score);
+    console.log("highscore");
+    console.log(highscore);
+    }
+  }
+}
+function timer() {
+  var sec = 60;
+  function startTimer(){
+      console.log('timer suppose to go')
+      var timer = setInterval(function(){
+          sec--;
+          document.getElementById('timerDisplay').innerHTML='00:'+sec;
+          if (sec <= 0) {
+              highscore();
+              clearInterval(timer);
+              alert("Time is up!");
+          }
+      }, 1000);
+  }
+  document.getElementById('incorrect').addEventListener('click', function() {
+      sec -= 5;
+      document.getElementById('timerDisplay').innerHTML='00:'+sec;
+  });
+  startTimer();
+}
 
 startBtnEl.addEventListener('click', startQuiz);
 option1El.addEventListener('click', optionClick);
