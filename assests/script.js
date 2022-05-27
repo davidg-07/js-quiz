@@ -61,15 +61,17 @@ const option3El = document.getElementById('option3');
 const option4El = document.getElementById('option4');
 const qsectionEl = document.getElementById('question-section');
 const resSectionEl = document.getElementById('result-section');
-var questionIndex = 0;
-console.log(questionIndex)
-var sec = 15;
-var score = 0;
+
+var currentQuestion = 0;
+ var sec = 60;
+
 
 function startQuiz() {
   startBtnEl.style.display = 'none';
   questionIndex = 0   
   qsectionEl.hidden = '';    
+  timer();
+  displayQuestion();
   timer();
   displayQuestion();
 }
@@ -148,28 +150,32 @@ function highscore() {
     console.log(highscore);
     }
   }
-}
 
-function timer() {
-  function startTimer(){
-      console.log('timer suppose to go')
-      var timer = setInterval(function(){
-          sec--;
-          document.getElementById('timerDisplay').innerHTML='00:'+sec;
-          if (sec <= 0) {
-            clearInterval(timer);
-            alert("Time is up!");
-            endQuiz();
-          }
-      }, 1000);
+  function endQuiz(){
+    qsectionEl.hidden = "hidden";
+    resSectionEl.hidden = "";
+    highscore();
   }
 
-  document.getElementById('incorrect').addEventListener('click', function() {
-      sec -= 5;
-      document.getElementById('timerDisplay').innerHTML='00:'+sec;
-  });
-  startTimer();
-}
+  (function() {
+    function startTimer(){
+        console.log('timer suppose to go')
+        var timer = setInterval(function(){
+            sec--;
+            document.getElementById('timerDisplay').innerHTML='00:'+sec;
+            if (sec <= 0) {
+                clearInterval(timer);
+                alert("Time is up!");
+                endQuiz()
+            }
+        }, 1000);
+    }
+    document.getElementById('incorrect').addEventListener('click', function() {
+        sec -= 5;
+        document.getElementById('timerDisplay').innerHTML='00:'+sec;
+    });
+    startTimer();
+})();
 
 startBtnEl.addEventListener('click', startQuiz);
 option1El.addEventListener('click', optionClick);
