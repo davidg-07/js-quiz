@@ -22,12 +22,12 @@ The HTML document includes:
 - JavaScript
 
 ## Links
-* [Deployed webpage](https://davidg-07.github.io/JS-Password/)
+* [Deployed webpage](https://davidg-07.github.io/js-quiz/)
 
 * [Repo](https://github.com/davidg-07/js-quiz)
 
 ## Screenshot
-![image]()
+![image](./screencapture-file-C-Users-david-BootCamp-Challenges-js-quiz-index-html-2022-05-26-20_16_28.pdf)
 
 ## Credit
 David Galvez
