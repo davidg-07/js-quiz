@@ -36,22 +36,22 @@ const questions = [
           answer: 3
       },
       { // question [8]
-          title: "To find the highest number in an array, the method to be used is?",
-          options: ["Math.highest", "Math.max()", "Math.largest", "Math.cal"],
-          answer: 2
+        title: "To find the highest number in an array, the method to be used is?",
+        options: ["Math.highest", "Math.max()", "Math.largest", "Math.cal"],
+        answer: 2
       },
       { // question [9]
           title: "An array can be sorted in a reverse manner through the method?",
           options: ["Sort()", "Reverse()", "Rev.length()", "Sort.length()"],
           answer: 2
-      },
+        },
       { // question [10]
-          title:"Numeric array values can be sorted throught an array method named as?",
+        title:"Numeric array values can be sorted throught an array method named as?",
           options: ["Sort()", "Lenght.sort()", "Reverse()", "Compare()"],
           answer: 4
       },
     ];
-
+    
 /* Select the required html elements here... */
 const startBtnEl = document.getElementById('start-btn');
 const questionEl = document.getElementById('question');
@@ -61,22 +61,26 @@ const option3El = document.getElementById('option3');
 const option4El = document.getElementById('option4');
 const qsectionEl = document.getElementById('question-section');
 const resSectionEl = document.getElementById('result-section');
-var currentQuestion = 0;
+var questionIndex = 0;
+console.log(questionIndex)
+var sec = 15;
+var score = 0;
 
-console.log(option1El.dataset.answer);
-
-function startQuiz() {   
+function startQuiz() {
+  startBtnEl.style.display = 'none';
+  questionIndex = 0   
   qsectionEl.hidden = '';    
-  displayQuestion();
   timer();
+  displayQuestion();
 }
 
-function displayQuestion() {  
-    questionEl.innerText = questions[currentQuestion].title;
-    option1El.innerText = questions[currentQuestion].options[0];
-    option2El.innerText = questions[currentQuestion].options[1];
-    option3El.innerText = questions[currentQuestion].options[2];
-    option4El.innerText = questions[currentQuestion].options[3];      
+function displayQuestion() {
+
+    questionEl.innerText = questions[questionIndex].title;
+    option1El.innerText = questions[questionIndex].options[0];
+    option2El.innerText = questions[questionIndex].options[1];
+    option3El.innerText = questions[questionIndex].options[2];
+    option4El.innerText = questions[questionIndex].options[3];;      
   }
 
 /**
@@ -87,44 +91,56 @@ function displayQuestion() {
 
     console.log('event is: ', event);
   
-    if(event.target.dataset.option == questions[currentQuestion].answer) {
+    if(event.target.dataset.option == questions[questionIndex].answer) {
       // TODO correct answer is clicked.
       console.log('correct!');
+      score++
+      checkIfOver()
     }
     else {
       // TODO incorrec answer is clicked.
       console.warn('incorrect');
+      checkIfOver()
     }
     // TODO display the next question.
-    currentQuestion++;
-    if (currentQuestion >= questions.length) {
-      // TODO: the quiz is over! display the result now. 
-      qsectionEl.hidden = 'hidden';
-      resSectionEl.hidden = '';
-      return;
-    }
-    displayQuestion();
   }
 
-  const btn = document.getElementById('start-btn');
+  function checkIfOver(){
+    if (questionIndex = questions.length -1 || sec == 0) {
+      // TODO: the quiz is over! display the result now.
+      console.log("Questions.length" + questions.length) 
+      console.log("Current QUestion Index: " + questionIndex)
+      endQuiz();
+      return;
+    } else {
+      questionIndex++
+      displayQuestion();
+    }
 
-btn.addEventListener('click', () => {
-  //  hide button
-  btn.style.display = 'none';
+  }
+//   const btn = document.getElementById('start-btn');
 
-  // const box = document.getElementById('box');
-  // box.style.display = 'block';
-});
+// btn.addEventListener('click', () => {
+//   //  hide button
 
+//   // const box = document.getElementById('box');
+//   // box.style.display = 'block';
+// });
+
+function endQuiz(){
+  qsectionEl.hidden = "hidden"
+  resSectionEl.hidden = '';
+  highscore();
+}
+           
 function highscore() {
-  var score = 0;
   var highscore = localStorage.getItem("highscore");
   console.log("localstorage");
   console.log(localStorage);
 
   if(highscore !== null){
     if(score > highscore) {
-      localStorage.setItem("highscore", score);
+      localStorage.setItem("highscore", JSON.stringify(score));
       }
     else { 
       localStorage.setItem("highscore", score);
@@ -133,20 +149,21 @@ function highscore() {
     }
   }
 }
+
 function timer() {
-  var sec = 60;
   function startTimer(){
       console.log('timer suppose to go')
       var timer = setInterval(function(){
           sec--;
           document.getElementById('timerDisplay').innerHTML='00:'+sec;
           if (sec <= 0) {
-              highscore();
-              clearInterval(timer);
-              alert("Time is up!");
+            clearInterval(timer);
+            alert("Time is up!");
+            endQuiz();
           }
       }, 1000);
   }
+
   document.getElementById('incorrect').addEventListener('click', function() {
       sec -= 5;
       document.getElementById('timerDisplay').innerHTML='00:'+sec;
