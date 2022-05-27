@@ -62,11 +62,15 @@ const option4El = document.getElementById('option4');
 const qsectionEl = document.getElementById('question-section');
 const resSectionEl = document.getElementById('result-section');
 var currentQuestion = 0;
+var sec = 60;
+var score = 0;
 
 console.log(option1El.dataset.answer);
 
 function startQuiz() {   
 qsectionEl.hidden = '';    
+displayQuestion();
+timer();
 displayQuestion();
 }
 
@@ -93,6 +97,7 @@ function optionClick(event) {
   else {
     // TODO incorrec answer is clicked.
     console.warn('incorrect');
+    sec = sec -5
   }
   // TODO display the next question.
   currentQuestion++;
@@ -103,6 +108,33 @@ function optionClick(event) {
     return;
   }
   displayQuestion();
+}
+
+function endQuiz(){
+  qsectionEl.hidden = "hidden"
+  resSectionEl.hidden = '';
+  highscore();
+}
+
+function timer() {
+  function startTimer(){
+      console.log('timer suppose to go')
+      var timer = setInterval(function(){
+          sec--;
+          document.getElementById('timerDisplay').innerHTML='00:'+sec;
+          if (sec <= 0) {
+            clearInterval(timer);
+            alert("Time is up!");
+            endQuiz();
+          }
+      }, 1000);
+  }
+
+  document.getElementById('incorrect').addEventListener('click', function() {
+      sec -= 5;
+      document.getElementById('timerDisplay').innerHTML='00:'+sec;
+  });
+  startTimer();
 }
 
 startBtnEl.addEventListener('click', startQuiz);
